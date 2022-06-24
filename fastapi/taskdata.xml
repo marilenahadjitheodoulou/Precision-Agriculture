@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ISO11783_TaskData DataTransferOrigin="1" ManagementSoftwareManufacturer="CNR" ManagementSoftwareVersion="1.0.0" VersionMajor="1" VersionMinor="0">
+    <CTR A="CTR1" B="Ente Parco" />
+    <FRM A="FRM5" B="Parco San Rossore" C="via Cascine vecchie" H="Italy" I="CTR1" />
+    <PFD A="PFD5" C="Oncinos Field" D="10000" E="CTR1" F="FRM5">
+        <PLN A="1" C="10000">
+            <LSG A="1">
+                <PNT A="2" C="43.6925" D="10.331468" />
+                <PNT A="2" C="43.693387" D="10.339841" />
+                <PNT A="2" C="43.69281" D="10.340156" />
+                <PNT A="2" C="43.691266" D="10.338632" />
+                <PNT A="2" C="43.690469" D="10.331414" />
+                <PNT A="2" C="43.6925" D="10.331468" />
+            </LSG>
+        </PLN>
+    </PFD>
+    <PGP A="PGP1" B="Fertilizer" />
+    <PGP A="PGP2" B="Chemical (Dry/Liquid)" />
+    <PDT A="PDT76" B="Dry Blood" C="PGP1" />
+    <PDT A="PDT79" B="New Spray" C="PGP2" />
+    <CTP A="CTP6" B="Sorghum">
+        <CVT A="CVT77" B="Sorghum for Sillage" />
+    </CTP>
+    <WKR A="WKR3" B="Pasqualetti" />
+    <TSK A="TSK1" B="Oncinos Field VRA Fert" C="CTR1" D="FRM5" E="PFD5" F="WKR3" G="1" H="0">
+        <TZN A="0" B="0 in">
+            <PDV A="0006" B="0" C="PDT76" />
+        </TZN>
+        <GRD A="43.73363953742374" B="10.324935520056673" C="4.500161864484653e-06" D="6.206616095738582e-06" E="448" F="821" G="GRD00001" H="1471232" I="2" J="0" />
+        <DLT A="DFFF" B="31" />
+    </TSK>
+</ISO11783_TaskData>
