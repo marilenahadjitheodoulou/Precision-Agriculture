@@ -1,0 +1,7 @@
+<OGRVRTDataSource>
+            <OGRVRTLayer name="temp">
+                <SrcDataSource>C:/Users/maril/OneDrive/Documents/DSS_Fertilizer_final/temp.csv</SrcDataSource>
+                <GeometryType>wkbPoint</GeometryType>
+                <GeometryField encoding="PointFromColumns" x="x" y="y" z="value"/>
+            </OGRVRTLayer>
+        </OGRVRTDataSource>

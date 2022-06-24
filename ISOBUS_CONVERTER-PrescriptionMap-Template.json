@@ -1,0 +1,128 @@
+{
+	"Customer": {
+		"CustomerId": "CTR1",
+		"CustomerDesignator": "Ente Parco"
+	},
+	"VersionMajor":1,
+	"VersionMinor":0,
+	"ManagementSoftwareManufacturer":"CNR",
+	"ManagementSoftwareVersion":"1.0.0",
+	"DataTransferOrigin":1,
+	"Farm": {
+		"FarmId": "FRM5",
+		"FarmDesignator": "Parco San Rossore",
+		"FarmStreet": "via Cascine vecchie",
+		"FarmCountry": "Italy",
+		"CustomerIdRef": "CTR1"
+	},
+	"Partfield": {
+		"PartfieldId": "PFD5",
+		"PartfieldDesignator": "Oncinos Field",
+		"PartfieldArea": 143933,
+		"FarmIdRef": "FRM5",
+		"CustomerIdRef": "CTR1",
+		"Polygon": {
+			"PolygonType": 1,
+			"PolygonArea": 143933,
+			"Linestring": {
+				"LinestringType": 1,
+				"Point": [{
+					"PointType": 2,
+					"PointNorth": 52.360174456983,
+					"PointEast": 8.02580186006361
+				}, {
+					"PointType": 2,
+					"PointNorth": 52.3603487682327,
+					"PointEast": 8.02614945234672
+				}, {
+					"PointType": 2,
+					"PointNorth": 52.3603739685867,
+					"PointEast": 8.02635206527005
+				}, {
+					"PointType": 2,
+					"PointNorth": 52.3604240068225,
+					"PointEast": 8.02671337180839
+				}, {
+					"PointType": 2,
+					"PointNorth": 52.3604812177847,
+					"PointEast": 8.02712943173222
+				}, {
+					"PointType": 2,
+					"PointNorth": 52.360552278144,
+					"PointEast": 8.02759460798228
+				}, {
+					"PointType": 2,
+					"PointNorth": 52.3605116072016,
+					"PointEast": 8.02796339740699
+				}]
+			}
+		}
+	},
+	"ProductGroup": [{
+			"ProductGroupId": "PGP1",
+			"ProductGroupDesignator": "Fertilizer"
+		},
+		{
+			"ProductGroupId": "PGP2",
+			"ProductGroupDesignator": "Chemical (Dry/Liquid)"
+		}
+	],
+	"Product": [{
+			"ProductId": "PDT76",
+			"ProductDesignator": "Dry Blood",
+			"ProductGroupIdRef": "PGP1"
+		},
+		{
+			"ProductId": "PDT79",
+			"ProductDesignator": "New Spray",
+			"ProductGroupIdRef": "PGP2"
+		}
+	],
+	"CropType": [{
+			"CropTypeId": "CTP6",
+			"CropTypeDesignator": "Sorghum",
+			"CropVariety": [{
+					"CropVarietyId": "CVT77",
+					"CropVarietyDesignator": "Sorghum for Sillage"
+				}
+			]
+		}
+	],
+	"Worker": {
+		"WorkerId":"WKR3",
+		"WorkerDesignator":"Pasqualetti"
+	},
+	"Task": [{
+			"TaskId": "TSK1",
+			"TaskDesignator": "Oncinos Field VRA Fert",
+			"TaskStatus":1,
+			"CustomerIdRef": "CTR1",
+			"FarmIdRef": "FRM5",
+			"PartfieldIdRef": "PFD5",
+			"ResponsibleWorkerIdRef":"WKR3",
+			"DefaultTreatmentZoneCode":0,
+			"TreatmentZone": [{
+				"TreatmentZoneCode": 0,
+				"TreatmentZoneDesignator": "0 in",
+				"ProcessDataVariable":[
+					{
+						"ProcessDataValue":0,
+						"UoM":"mg/m2",
+						"ProductIdRef":"PDT76"
+					}
+				]
+			}],
+			"Grid":{
+				"GridMinimumNorthPosition":52.3556726386474,
+				"GridMinimumEastPosition": 8.02579821672562,
+				"GridCellNorthSize": 0.0000274298056155508,
+				"GridCellEastSize": 0.0000449110911118952,
+				"GridMaximumColumn": 142,
+				"GridMaximumRow": 178,
+				"TreatmentZoneCode": 0,
+				"GridCell": [0,0,0,2,1,1,2,2,2,0,2,1,1,1,1,0,0,0,1],
+				"Filelength": 0
+			}
+		}
+	]
+}

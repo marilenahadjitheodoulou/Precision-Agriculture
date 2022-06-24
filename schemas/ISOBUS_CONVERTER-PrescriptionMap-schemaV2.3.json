@@ -1,0 +1,803 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"definitions": {
+		"Polygon": {
+			"type": "object",
+			"properties": {
+				"PolygonType": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 12
+				},
+				"PoligonDesignator": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"PoligonArea": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 4294967294
+				},
+				"LineString" : {
+					"type":"object",
+					"properties": {
+						"LineStringType" : {
+							"type":"integer",
+							"description": "Type of the LineString,\npossible values:\n1 = PolygonExterior\n2 = PolygonInterior\n3 = TramLine\n4 = SamplingRoute\n5 = GuidancePattern\n6 = Drainage\n7 = Fence\n8 = Flag\n9 = Obstacle, any kind of\nobstacle, e.g. used to generate\na warning when approaching\nan obstacle",
+							"minimum": 1,
+							"maximum": 9
+						},
+						"LineStringDesignator" : {
+							"type":"string",
+							"maxLength":32
+						},
+						"LineStringWidth":{
+							"type":"integer",
+							"minimum": 0,
+							"maximum": 4294967294
+						},
+						"LineStringLength":{
+							"type":"integer",
+							"minimum": 0,
+							"maximum": 4294967294
+						},
+						"LineStringColour":{
+							"type":"string",
+							"minLength":8,
+							"maxLength":8,
+							"pattern": "^(0x)([a-fA-F0-9]{2})$+"
+						},
+						"LineStringIdRef": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(CTR|CTR-)[0-9]{1,11}"
+						},
+						"Point":{
+							"type":"array",
+							"items": [
+								{
+									"type":"object",
+									"properties": {
+										"PointType":{
+											"type":"integer",
+											"description": "Defines the meaning of this point:\n1 = Flag\n2 = other\n3 = Field Access, entry point of a fielda\n4 = Storage, location where product is stored on a field\n5 = Obstacle, any kind of obstacle, e.g. used to generate warnings when approaching a obstacle\n6 = Guidance Reference A, start point of a guidance line, e.g the A point in an A-B linea\n7 = Guidance Reference B, end point of a guidance line, e.g. the B point in an A-B linea\n8 = Guidance Reference Center, centre point of a guidance pivot pattern\n9 = Guidance Point, guidance related point that is neither an A, B or Center reference pointa\n10 = Partfield Reference Point, location in e.g. a Partfield that identifies the field for administrative purposes\n11 = Homebase",
+											"minimum": 1,
+											"maximum": 11
+										},
+										"PointDesignator": {
+											"type":"string",
+											"maxLength":32
+										},
+										"PointNorth" : {
+											"type":"number",
+											"description": "GPS position north WGS84",
+											"minimum": -90.0,
+											"maximum": 90.0
+										},
+										"PointEast":{
+											"type":"number",
+											"description": "GPS position east WGS84",
+											"minimum": -180.0,
+											"maximum": 180.0
+										},
+										"PointUp": {
+											"type":"integer",
+											"description": "GPS position altitude WGS84 ellipsoid in mm",
+											"minimum": -2147483649,
+											"maximum": 2147483647
+										},
+										"PointColour": {
+											"type":"string",
+											"minLength":8,
+											"maxLength":8,
+											"pattern": "^(0x)([a-fA-F0-9]{2})$+"
+										},
+										"PointId":{
+											"type": "string",
+											"minLength": 4,
+											"maxLength": 14,
+											"pattern": "^(PTN|PTN-)[0-9]{1,11}"
+										},
+										"PointHorizontalAccuracy":{
+											"type":"number",
+											"minimum": 0,
+											"maximum": 65.0,
+											"description": "Point horizontal estimated accuracy (RMS error) in m"
+										},
+										"PointVerticalAccuracy":{
+											"type":"number",
+											"minimum": 0,
+											"maximum": 65.0,
+											"description": "Point horizontal estimated accuracy (RMS error) in m"
+										}
+									},
+									"additionalProperties": false,
+									"required": [
+										"PointNorth",
+										"PointEast",
+										"PointType"
+									]
+								}
+							]
+						}
+					},
+					"additionalProperties": false,
+					"required": [
+					"LineStringType",
+					"Point"
+					]
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+			"PolygonType"
+			]
+		}
+	},
+	"type": "object",
+	"properties": {
+		"VersionMajor":{
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 99
+		},
+		"VersionMinor":{
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 99
+		},
+		"ManagementSoftwareManufacturer":{
+			"type": "string",
+			"maxLength": 32
+		},
+		"ManagementSoftwareVersion":{
+			"type": "string",
+			"maxLength": 32
+		},
+		"DataTransferOrigin":{
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 1
+		},
+		"Customer": {
+			"type": "object",
+			"properties": {
+				"CustomerId": {
+					"type": "string",
+					"minLength": 4,
+					"maxLength": 14,
+					"pattern": "^(CTR|CTR-)[0-9]{1,11}"
+				},
+				"CustomerDesignator": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"CustomerFirstName": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"CustomerPOBox": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"CustomerStreet": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"CustomerPhone": {
+					"type": "string",
+					"maxLength": 20
+				},
+				"CustomerMobile": {
+					"type": "string",
+					"maxLength": 20
+				},
+				"CustomerFax": {
+					"type": "string",
+					"maxLength": 20
+				},
+				"CustomerEMail": {
+					"type": "string",
+					"maxLength": 64
+				},
+				"CustomerPostalCode": {
+					"type": "string",
+					"maxLength": 10
+				},
+				"CustomerCity": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"CustomerState": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"CustomerCountry": {
+					"type": "string",
+					"maxLength": 32
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"CustomerId",
+				"CustomerDesignator"
+			]
+		},
+		"Farm": {
+			"type": "object",
+			"properties": {
+				"FarmId": {
+					"type": "string",
+					"minLength": 4,
+					"maxLength": 14,
+					"pattern": "^(FRM|FRM-)[0-9]{1,11}"
+				},
+				"FarmDesignator": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"FarmStreet": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"FarmPOBox": {
+					"type": "null",
+					"maxLength": 32
+				},
+				"FarmPostalCode": {
+					"type": "string",
+					"maxLength": 10
+				},
+				"FarmCity": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"FarmState": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"FarmCountry": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"CustomerIdRef": {
+					"type": "string",
+					"minLength": 4,
+					"maxLength": 14,
+					"pattern": "^(CTR|CTR-)[0-9]{1,11}"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"FarmId",
+				"FarmDesignator"
+			]
+		},
+		"Partfield": {
+			"type": "object",
+			"properties": {
+				"PartfieldId": {
+					"type": "string" ,
+					"minLength": 4,
+					"maxLength": 14,
+					"pattern": "^(PFD|PFD-)[0-9]{1,11}"
+				},
+				"PartfieldDesignator": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"PartfieldArea": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 42949672945
+				},
+				"FarmIdRef": {
+					"type": "string",
+					"minLength": 4,
+					"maxLength": 14,
+					"pattern": "^(FRM|FRM-)[0-9]{1,11}"
+				},
+				"CustomerIdRef": {
+					"type": "string",
+					"minLength": 4,
+					"maxLength": 14,
+					"pattern": "^(CTR|CTR-)[0-9]{1,11}"
+				},
+				"Polygon": {
+					"ref": "#/definitions/Polygon"
+				}
+			},
+			"additionalProperties": true,
+			"required": [
+				"PartfieldId",
+				"PartfieldDesignator",
+				"PartfieldArea"
+			]
+		},
+		"ProductGroup": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": [
+				{
+					"type": "object",
+					"properties": {
+						"ProductGroupId": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(PGP|PGP-)[0-9]{1,11}"
+						},
+						"ProductGroupDesignator": {
+							"type": "string",
+							"maxLength": 32
+						},
+						"CulturalPracticeDesignator":{
+							"type": "string",
+							"maxLength": 32
+						}
+					},
+					"additionalProperties": false,
+					"required": [
+						"ProductGroupId",
+						"ProductGroupDesignator"
+					]
+				}
+			],
+			"additionalItems": true
+		},
+		"Product": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": [
+				{
+					"type": "object",
+					"properties": {
+					"ProductId": {
+						"type": "string",
+						"minLength": 4,
+						"maxLength": 14,
+						"pattern": "^(PDT|PDT-)[0-9]{1,11}"
+					},
+					"ProductGroupId": {
+						"type": "string",
+						"minLength": 4,
+						"maxLength": 14,
+						"pattern": "^(PGP|PGP-)[0-9]{1,11}"
+					},
+					"ProductDesignator": {
+						"type": "string",
+						"maxLength": 32
+					}
+					},
+					"additionalProperties": true,
+					"required": [
+						"ProductId",
+						"ProductDesignator"
+					]
+				}
+			],
+			"additionalItems": true
+		},
+		"CropType": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": [
+				{
+					"type": "object",
+					"properties": {
+						"CropTypeId": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(CTP|CTP-)[0-9]{1,11}"
+						},
+						"CropTypeDesignator": {
+							"type": "string",
+							"maxLength": 32
+						},
+						"CropVariety": {
+							"type": "array",
+							"items": [
+								{
+									"type": "object",
+									"properties": {
+										"CropVarietyId": {
+											"type": "string"
+										},
+										"CropVarietyDesignator": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": true,
+									"required": [
+										"CropVarietyId",
+										"CropVarietyDesignator"
+									]
+								}
+							]
+						}
+					},
+					"additionalProperties": true,
+					"required": [
+							"CropTypeId",
+							"CropTypeDesignator"
+					]
+				}
+			]
+		},
+		"Task": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": [
+				{
+					"type": "object",
+					"properties": {
+						"TaskId": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(TSK|TSK-)[0-9]{1,11}"
+						},
+						"TaskDesignator": {
+							"type": "string",
+							"maxLength": 32
+						},
+						"CustomerIdRef": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(CTR|CTR-)[0-9]{1,11}"
+						},
+						"FarmIdRef": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(FRM|FRM-)[0-9]{1,11}"
+						},
+						"PartfieldIdRef": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(PFD|PFD-)[0-9]{1,11}"
+						},
+						"ResponsibleWorkerIdRef":{
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(WKR|WKR-)[0-9]{1,11}"
+						},
+						"DefaultTreatmentZoneCode":{
+							"type":"integer",
+							"minimum":0,
+							"maximum":254
+						},
+						"PositionLostTreatmentZoneCode":{
+							"type":"integer",
+							"minimum":0,
+							"maximum":254
+						},
+						"OutOfFieldTreatmentZoneCode":{
+							"type":"integer",
+							"minimum":0,
+							"maximum":254
+						},
+						"TaskStatus":{
+							"type":"integer",
+							"description":"Status of the task, possible values:\n1 = planned\n2 = running\n3 = paused\n4 = completed\n5 = template\n6 = canceled",
+							"minimum":1,
+							"maximum":6
+						},
+						"TreatmentZone":{
+							"type":"array",
+							"description": "Inside a task, treatment zones can be referenced. Each TreatmentZone has a special meaning concerning the included ProcessDataVariables. The values of those ProcessDataVariables are to be applied globally to the whole task.",
+							"items": {
+								"type":"object",
+								"uniqueItems": true,
+								"properties": {
+									"TreatmentZoneCode":{
+										"type":"integer",
+										"minimum": 0,
+										"maximum": 254
+									},
+									"TreatmentZoneDesignator":{
+										"type": "string",
+										"maxLength": 32
+									},
+									"TreatmentZoneColour":{
+										"type":"string",
+										"minLength":8,
+										"maxLength":8,
+										"pattern": "^(0x)([a-fA-F0-9]{2})$+"
+									},
+									"Polygons": {
+										"type":"array",
+										"items": {
+										"ref": "#/definitions/Polygon"
+									}
+									},
+									"ProcessDataVariable":{
+										"type": "array",
+										"items": {
+											"type":"object",
+											"properties": {
+												"ProcessDataValue": {
+													"type":"number"
+												},
+												"UoM": {
+													"type": "string",
+													"maxLength": 32
+												},
+												"ProductIdRef":{
+													"type": "string",
+													"minLength": 4,
+													"maxLength": 14,
+													"pattern": "^(PDT|PDT-)[0-9]{1,11}"
+												}
+											},
+											"additionalProperties": false,
+											"required":[
+											"ProcessDataValue",
+											"UoM",
+											"ProductIdRef"
+											]
+										}
+									}
+								},
+								"additionalProperties": false,
+								"required":[
+								"TreatmentZoneCode"
+								]
+							}
+						},
+						"OperTechPractice":{
+							"type":"object",
+							"properties": {
+								"CulturalPracticeIdRef":{
+									"type": "string",
+									"minLength": 4,
+									"maxLength": 14,
+									"pattern": "^(CPC|CPC-)[0-9]{1,11}"
+								},
+								"OperationTechniqueIdRef":{
+									"type": "string",
+									"minLength": 4,
+									"maxLength": 14,
+									"pattern": "^(OTQ|OTQ-)[0-9]{1,11}"
+								}
+							},
+							"additionalProperties": false,
+							"required":[
+								"CulturalPracticeIdRef"
+							]
+						},
+						"ProductAllocation":{
+							"type":"object",
+							"properties": {
+								"ProductIdRef":{
+									"type": "string",
+									"minLength": 4,
+									"maxLength": 14,
+									"pattern": "^(PDT|PDT-)[0-9]{1,11}"
+								}
+							},
+							"additionalProperties": true,
+							"required":[
+								"ProductIdRef"
+							]
+						},
+						"Grid": {
+							"type":"object",
+							"properties": {
+								"GridMinimumNorthPosition":{
+									"type":"number",
+									"description": "Minimum north position of the grid WGS84",
+									"minimum": -90.0,
+									"maximum": 90.0
+								},
+								"GridMinimumEastPosition":{
+									"type":"number",
+									"description": "Minimum east position of the grid WGS84",
+									"minimum": -180.0,
+									"maximum": 180.0
+								},
+								"GridCellNorthSize":{
+									"type":"number",
+									"description": "North direction gridcell size WGS84",
+									"minimum": 0,
+									"maximum": 1.0
+								},
+								"GridCellEastSize":{
+									"type":"number",
+									"description": "East direction gridcell size WGS84",
+									"minimum": 0,
+									"maximum": 1.0
+								},
+								"GridMaximumColumn":{
+									"type":"integer",
+									"description": "Number of the gridcells in east direction",
+									"minimum": 0,
+									"maximum": 2147483647
+								},
+								"GridMaximumRow":{
+									"type":"integer",
+									"description": "Number of the gridcells in north direction",
+									"minimum": 0,
+									"maximum": 2147483647
+								},
+								"GridCell":{
+									"type":"array",
+									"description": "The grid cells of a grid contain a reference to a TreatmentZone or a process data variable value",
+									"items": {
+										"type":"integer"
+									}
+								}
+							},
+							"additionalProperties": true,
+							"required": [
+								"GridMinimumNorthPosition",
+								"GridMinimumEastPosition",
+								"GridCellNorthSize",
+								"GridCellEastSize",
+								"GridMaximumColumn",
+								"GridMaximumRow",
+								"GridCell"
+							]
+						}
+					},
+					"additionalProperties": true,
+					"required": [
+						"TaskId",
+						"TaskStatus"
+					]
+				}
+			],
+			"additionalItems": false
+		},
+		"Worker":{
+			"type": "object",
+			"properties": {
+				"WorkerId": {
+					"type": "string",
+					"minLength": 4,
+					"maxLength": 14,
+					"pattern": "^(WKR|WKR-)[0-9]{1,11}"
+				},
+				"WorkerDesignator": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"WorkerFirstName": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"WorkerPOBox": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"WorkerStreet": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"WorkerPhone": {
+					"type": "string",
+					"maxLength": 20
+				},
+				"WorkerMobile": {
+					"type": "string",
+					"maxLength": 20
+				},
+				"WorkerEMail": {
+					"type": "string",
+					"maxLength": 64
+				},
+				"WorkerPostalCode": {
+					"type": "string",
+					"maxLength": 10
+				},
+				"WorkerCity": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"WorkerState": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"WorkerCountry": {
+					"type": "string",
+					"maxLength": 32
+				},
+				"WorkerLicenseNumber":{
+					"type": "string",
+					"maxLength": 32
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"WorkerId",
+				"WorkerDesignator"
+			]
+		},
+		"OperationTechnique":{
+			"type": "array",
+			"uniqueItems": true,
+			"items": [
+				{
+					"type": "object",
+					"properties": {
+						"OperationTechniqueId": {
+							"type": "string" ,
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(OTQ|OTQ-)[0-9]{1,11}"
+						},
+						"OperationTechniqueDesignator": {
+							"type": "string",
+							"maxLength": 32
+						}
+					},
+					"additionalProperties": false,
+					"required": [
+						"OperationTechniqueId",
+						"OperationTechniqueDesignator"
+					]
+				}
+			]
+		},
+		"CulturalPractice":{
+			"type": "array",
+			"uniqueItems": true,
+			"items": [
+				{
+					"type": "object",
+					"properties": {
+						"CulturalPracticeId": {
+							"type": "string" ,
+							"minLength": 4,
+							"maxLength": 14,
+							"pattern": "^(CPC|CPC-)[0-9]{1,11}"
+						},
+						"CulturalPracticeDesignator": {
+							"type": "string",
+							"maxLength": 32
+						},
+						"OperationTechniqueReference": {
+							"type": "array",
+							"uniqueItems": true,
+							"items": [
+								{
+									"type":"object",
+									"properties":{
+										"OperationTechniqueIdRef":{
+											"type": "string" ,
+											"minLength": 4,
+											"maxLength": 14,
+											"pattern": "^(OTQ|OTQ-)[0-9]{1,11}"
+										}
+									},
+									"additionalProperties": false,
+									"required": [
+										"OperationTechniqueIdRef"
+									]
+								}
+							]
+						}
+					},
+					"additionalProperties": false,
+					"required": [
+						"CulturalPracticeId",
+						"CulturalPracticeDesignator"
+					]
+				}
+			]
+		}
+	},
+	"additionalProperties": true,
+	"required":[
+		"Task",
+		"VersionMajor",
+		"VersionMinor",
+		"ManagementSoftwareManufacturer",
+		"ManagementSoftwareVersion"
+	]
+}
